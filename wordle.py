@@ -17,13 +17,16 @@ def read_input(prompt: str, dictionary: list) -> str:
         
 
 class Game:
-    def __init__(self, file):
+    def __init__(self, file: str) -> None:
         self.attempts = 0
         with open(file, 'r') as f:
             word_list = [word.strip() for word in f.readlines()]
-            word = choice(dict)
+            word = choice(word_list)
         self.dictionary = word_list
         self.answer = word
+
+    def is_correct(self, input: str) -> bool:
+        return self.answer == input
 
 
 
@@ -31,5 +34,6 @@ if __name__ == '__main__':
     game = Game(file=WORD_FILE)
 
     print(game.answer)
-    read_input("enter your guess : ", game.dictionary)
+    print(game.is_correct('MOUSE'))
+    print(game.is_correct(game.answer))
     
