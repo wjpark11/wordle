@@ -54,10 +54,10 @@ class Game:
 
         for i in range(5):
             if answer_list[i] == input_list[i]:
+                self.keyboard[input_list[i]] = 'o'
                 answer_list[i] = '_'
                 input_list[i] = '_'
                 match[i] = 'o'
-                self.keyboard[answer_list[i]] = 'o'
         
         for i in range(5):
             if input_list[i] == '_':
