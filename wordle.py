@@ -70,7 +70,7 @@ class Game:
         self.history.append(list(zip(input,match)))
 
 
-def main(file):
+def main(file: str) -> None:
     game = Game(file=file)
 
     while game.attempts < 6:
