@@ -68,7 +68,8 @@ class Game:
                 if self.keyboard[input_list[i]] != 'o':
                     self.keyboard[input_list[i]] = '*'
             else:
-                self.keyboard[input_list[i]] = 'x'
+                if self.keyboard[input_list[i]] not in ('o','*'):
+                    self.keyboard[input_list[i]] = 'x'
 
         self.history.append(list(zip(input,match)))
 
