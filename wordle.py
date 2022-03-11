@@ -22,6 +22,8 @@ def get_colored_text(match_zip: list) -> str:
             colored_text += Back.GREEN + Fore.BLACK + item[0] + Style.RESET_ALL
         elif item[1] == '*':
             colored_text += Back.CYAN + Fore.BLACK + item[0] + Style.RESET_ALL
+        elif item[1] == '?':
+            colored_text += Fore.LIGHTWHITE_EX + item[0] + Style.RESET_ALL
         else:
             colored_text += item[0]
 
@@ -37,6 +39,7 @@ class Game:
         self.dictionary = word_list
         self.answer = word
         self.history = []
+        self.keyboard = {item:'?' for item in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'}
 
     def is_correct(self, input: str) -> bool:
         return self.answer == input
@@ -57,6 +60,7 @@ class Game:
                 answer_list[i] = '_'
                 input_list[i] = '_'
                 match[i] = 'o'
+                self.keyboard[answer_list[i]] = 'o'
         
         for i in range(5):
             if input_list[i] == '_':
@@ -64,8 +68,10 @@ class Game:
             elif input_list[i] in answer_list:
                 match[i] = '*'
                 answer_list[answer_list.index(input_list[i])] = '_'
+                if self.keyboard[input_list[i]] != 'o':
+                    self.keyboard[input_list[i]] = '*'
             else:
-                pass
+                self.keyboard[input_list[i]] = 'x'
 
         self.history.append(list(zip(input,match)))
 
@@ -77,6 +83,9 @@ def main(file: str) -> None:
         game.user_guess(read_input('Enter your guess: ', game.dictionary))
         for history in game.history:            
             print(get_colored_text(history))
+        print('-------------------------------------------')
+        print('keyboard')
+        print(get_colored_text([(k,v) for k,v in game.keyboard.items()]))
         if game.solved:
             break
         
@@ -89,3 +98,4 @@ def main(file: str) -> None:
 
 if __name__ == '__main__':
     main(file=WORD_FILE)
+    
