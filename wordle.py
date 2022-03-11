@@ -41,9 +41,6 @@ class Game:
         self.history = []
         self.keyboard = {item:'?' for item in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'}
 
-    def is_correct(self, input: str) -> bool:
-        return self.answer == input
-
     def user_guess(self, input: str) -> None:
         self.attempts += 1
         answer = self.answer
